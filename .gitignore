@@ -1,10 +1,12 @@
 *.a
 *.o
 *~
+*.bk
 make.inc
 seq-list/seq-list
 seq-csr/seq-csr
 omp-csr/omp-csr
+sq-imp-list/sq-imp-list
 *.pl
 xmt-csr/xmt-csr
 xmt-csr-local/xmt-csr-local
