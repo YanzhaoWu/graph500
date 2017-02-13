@@ -6,10 +6,10 @@ BUILD_XMT = No
 include make.inc
 
 GRAPH500_SOURCES=graph500.c options.c rmat.c kronecker.c verify.c prng.c \
-	xalloc.c timer.c 
+	xalloc.c timer.c
 
 MAKE_EDGELIST_SOURCES=make-edgelist.c options.c rmat.c kronecker.c prng.c \
-	xalloc.c timer.c 
+	xalloc.c timer.c
 
 BIN=seq-list/seq-list seq-csr/seq-csr make-edgelist
 
@@ -19,6 +19,10 @@ endif
 
 ifeq ($(BUILD_MPI), Yes)
 BIN += mpi/graph500_mpi_simple
+endif
+
+ifeq ($(BUILD_SQ), Yes)
+BIN += sq-imp-list/sq-imp-list
 endif
 
 ifeq ($(BUILD_XMT), Yes)
@@ -49,6 +53,10 @@ omp-csr/omp-csr-old: omp-csr/omp-csr-old.c $(GRAPH500_SOURCES) \
 
 omp-csr/omp-csr: CFLAGS:=$(CFLAGS) $(CFLAGS_OPENMP)
 omp-csr/omp-csr: omp-csr/omp-csr.c omp-csr/bitmap.h $(GRAPH500_SOURCES) \
+	$(addprefix generator/,$(GENERATOR_SRCS))
+
+sq-imp-list/sq-imp-list: CFLAGS:=$(CFLAGS)
+sq-imp-list/sq-imp-list: sq-imp-list/sq-imp-list.c $(GRAPH500_SOURCES) \
 	$(addprefix generator/,$(GENERATOR_SRCS))
 
 xmt-csr/xmt-csr: CFLAGS:=$(CFLAGS) -pl xmt-csr/xmt-csr.pl

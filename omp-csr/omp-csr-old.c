@@ -219,7 +219,7 @@ gather_edges (const struct packed_edge * restrict IJ, int64_t nedge)
   }
 }
 
-int 
+int
 create_graph_from_edgelist (struct packed_edge *IJ, int64_t nedge)
 {
   find_nv (IJ, nedge);
